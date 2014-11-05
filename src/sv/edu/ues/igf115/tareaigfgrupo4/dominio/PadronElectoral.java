@@ -1,4 +1,4 @@
-package dominio;
+package sv.edu.ues.igf115.tareaigfgrupo4.dominio;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,75 +16,65 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name = "PadronElectoral", catalog = "tarea_grupo4_clave4", schema = "") 
+@Table(name = "padronelectoral", catalog = "tarea", schema = "") 
 @NamedQueries({ 
  @NamedQuery(name = "PadronElectoral.findAll", query = "SELECT p FROM PadronElectoral p"), 
- @NamedQuery(name = "PadronElectoral.findByDui", query = "SELECT p FROM PadronElectoral p WHERE p.dui = :dui"), 
- @NamedQuery(name = "Jrv.findByIdUrna", query = "SELECT p FROM PadronElectoral p WHERE p.id_Urna = :id_Urna")
+ @NamedQuery(name = "PadronElectoral.findByDui", query = "SELECT p FROM PadronElectoral p WHERE p.dui = :dui")
  }) 
 public class PadronElectoral implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String dui;
-	private Urna urna;
-	private String nombres;
+	private String nombre;
 	private String apellidos;
-	private Date fecha_nac;
+	private Date fechanac;
 	private String domicilio;
-	private String estado_votacion;
+	private String estadovotacion;
+	private int idurna;
 	private String username;
-	private Date fecha_hora;
-	private String user_modifico;
-	private Date fecha_hora_modifico;
 	
 	public PadronElectoral(){
 		
 	}
 
-	public PadronElectoral(String dui, String nombres, String apellidos,
-			Date fecha_nac, String domicilio, Date fecha_hora) {
+	
+
+	public PadronElectoral(String dui, String nombre, String apellidos,String domicilio, String estadovotacion, int idurna,String username, Date fechanac) {
 		super();
 		this.dui = dui;
-		this.nombres = nombres;
+		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.fecha_nac = fecha_nac;
 		this.domicilio = domicilio;
-		this.fecha_hora = fecha_hora;
+		this.estadovotacion = estadovotacion;
+		this.idurna = idurna;
+		this.username = username;
+		this.fechanac = fechanac;
 	}
 
-	 @Id 
-	 @GeneratedValue(strategy = GenerationType.IDENTITY) 
-	 @Basic(optional = false) 
-	 @Column(name = "dui") 
+
+
+	@Id 
+	@Basic(optional = false) 
+	@Column(name = "dui") 
 	public String getDui() {
 		return dui;
 	}
 
-	 
 	public void setDui(String dui) {
 		this.dui = dui;
 	}
 
-	@JoinColumn(name = "id_urna", referencedColumnName = "id_urna") 
-	@ManyToOne(optional = false) 
-	public Urna getUrna() {
-		return urna;
+	@Basic(optional = false) 
+	@Column(name = "nombre") 
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setUrna(Urna urna) {
-		this.urna = urna;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Basic(optional = false) 
-	@Column(name = "nombres")
-	public String getNombres() {
-		return nombres;
-	}
-
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
-
-	@Basic(optional = false) 
-	@Column(name = "apellidos")
+	@Column(name = "apellidos") 
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -94,17 +84,17 @@ public class PadronElectoral implements Serializable{
 	}
 
 	@Basic(optional = false) 
-	@Column(name = "fecha_nac")
-	public Date getFecha_nac() {
-		return fecha_nac;
+	@Column(name = "fechanac") 
+	public Date getFechanac() {
+		return fechanac;
 	}
 
-	public void setFecha_nac(Date fecha_nac) {
-		this.fecha_nac = fecha_nac;
+	public void setFechanac(Date fechanac) {
+		this.fechanac = fechanac;
 	}
 
 	@Basic(optional = false) 
-	@Column(name = "domicilio")
+	@Column(name = "domicilio") 
 	public String getDomicilio() {
 		return domicilio;
 	}
@@ -114,17 +104,17 @@ public class PadronElectoral implements Serializable{
 	}
 
 	@Basic(optional = false) 
-	@Column(name = "estado_votacion")
-	public String getEstado_votacion() {
-		return estado_votacion;
+	@Column(name = "estadovotacion") 
+	public String getEstadovotacion() {
+		return estadovotacion;
 	}
 
-	public void setEstado_votacion(String estado_votacion) {
-		this.estado_votacion = estado_votacion;
+	public void setEstadovotacion(String estadovotacion) {
+		this.estadovotacion = estadovotacion;
 	}
 
 	@Basic(optional = false) 
-	@Column(name = "username")
+	@Column(name = "username") 
 	public String getUsername() {
 		return username;
 	}
@@ -133,35 +123,20 @@ public class PadronElectoral implements Serializable{
 		this.username = username;
 	}
 
+	
 	@Basic(optional = false) 
-	@Column(name = "fecha_hora")
-	public Date getFecha_hora() {
-		return fecha_hora;
+	@Column(name = "idurna") 
+	public int getIdurna() {
+		return idurna;
 	}
 
-	public void setFecha_hora(Date fecha_hora) {
-		this.fecha_hora = fecha_hora;
+	public void setIdurna(int idurna) {
+		this.idurna = idurna;
 	}
+	
+	
 
-	@Basic(optional = false) 
-	@Column(name = "user_modifico")
-	public String getUser_modifico() {
-		return user_modifico;
-	}
-
-	public void setUser_modifico(String user_modifico) {
-		this.user_modifico = user_modifico;
-	}
-
-	@Basic(optional = false) 
-	@Column(name = "fecha_hora_modifico")
-	public Date getFecha_hora_modifico() {
-		return fecha_hora_modifico;
-	}
-
-	public void setFecha_hora_modifico(Date fecha_hora_modifico) {
-		this.fecha_hora_modifico = fecha_hora_modifico;
-	}
+	
 	
 	
 }

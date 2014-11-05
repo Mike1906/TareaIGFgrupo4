@@ -1,4 +1,4 @@
-package dominio;
+package sv.edu.ues.igf115.tareaigfgrupo4.dominio;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,117 +18,97 @@ import javax.persistence.NamedQuery;
 
 
 @Entity 
-@Table(name = "jrv", catalog = "tarea_grupo4_clave4", schema = "") 
+@Table(name = "jrv", catalog = "tarea", schema = "") 
 @NamedQueries({ 
- @NamedQuery(name = "Jrv.findAll", query = "SELECT j FROM Jrv j"), 
- @NamedQuery(name = "Jrv.findById", query = "SELECT j FROM Jrv e WHERE j.id_Jrv = :id_Jrv"), 
- @NamedQuery(name = "Jrv.findByDepto", query = "SELECT j FROM Jrv j WHERE j.id_Depto = :id_Depto"), 
- @NamedQuery(name = "Jrv.findByMunicipio", query = "SELECT j FROM Jrv j WHERE j.id_Municipio = :id_Municipio")}) 
+ @NamedQuery(name = "jrv.findAll", query = "SELECT j FROM Jrv j"), 
+ @NamedQuery(name = "jrv.findById", query = "SELECT j FROM Jrv j WHERE j.idjrv = :idjrv"),
+ @NamedQuery(name = "jrv.findByDui", query = "SELECT j FROM Jrv j WHERE j.dui = :dui")
+ }) 
 public class Jrv implements Serializable{
- private int idJrv;
+	private static final long serialVersionUID = 1L;
+ private Short idjrv;
+ private String iddepto;
+ private String idmunicipio;
+ private String dui;
  private String username;
- private Date fecha_hora;
- private String user_modifico;
- private Date fecha_hora_modifico;
- private Municipio municipio;
- private Departamento departamento;
- private PadronElectoral padronelectoral;
+
  
  public Jrv(){
 	 
  }
 
-public Jrv( String username, Date fecha_hora, Municipio municipio,
-		Departamento departamento, PadronElectoral padronelectoral) {
+public Jrv(String iddepto, String idmunicipio, String dui,
+		String username) {
 	super();
+	this.iddepto = iddepto;
+	this.idmunicipio = idmunicipio;
+	this.dui = dui;
 	this.username = username;
-	this.fecha_hora = fecha_hora;
-	this.municipio = municipio;
-	this.departamento = departamento;
-	this.padronelectoral = padronelectoral;
 }
 
-@Id
+
+
+
+
+@Id 
 @GeneratedValue(strategy = GenerationType.IDENTITY) 
 @Basic(optional = false) 
-@Column(name = "Id_JRV") 
-public int getIdJrv() {
-	return idJrv;
+@Column(name = "idjrv") 
+public Short getIdjrv() {
+	return idjrv;
 }
 
-public void setIdJrv(int idJrv) {
-	this.idJrv = idJrv;
+
+public void setIdjrv(Short idjrv) {
+	this.idjrv = idjrv;
 }
 
 @Basic(optional = false) 
-@Column(name = "username") 
+@Column(name = "iddepto")
+public String getIddepto() {
+	return iddepto;
+}
+
+
+public void setIddepto(String iddepto) {
+	this.iddepto = iddepto;
+}
+
+@Basic(optional = false) 
+@Column(name = "idmunicipio")
+public String getIdmunicipio() {
+	return idmunicipio;
+}
+
+
+public void setIdmunicipio(String idmunicipio) {
+	this.idmunicipio = idmunicipio;
+}
+
+@Basic(optional = false) 
+@Column(name = "dui")
+public String getDui() {
+	return dui;
+}
+
+
+public void setDui(String dui) {
+	this.dui = dui;
+}
+
+@Basic(optional = false) 
+@Column(name = "username")
 public String getUsername() {
 	return username;
 }
+
 
 public void setUsername(String username) {
 	this.username = username;
 }
 
-@Basic(optional = false) 
-@Column(name = "Fecha_hora") 
-public Date getFecha_hora() {
-	return fecha_hora;
-}
 
-public void setFecha_hora(Date fecha_hora) {
-	this.fecha_hora = fecha_hora;
-}
 
-@Basic(optional = false) 
-@Column(name = "User_modifico") 
-public String getUser_modifico() {
-	return user_modifico;
-}
 
-public void setUser_modifico(String user_modifico) {
-	this.user_modifico = user_modifico;
-}
-
-@Basic(optional = false) 
-@Column(name = "Fecha_hora_modifico") 
-public Date getFecha_hora_modifico() {
-	return fecha_hora_modifico;
-}
-
-public void setFecha_hora_modifico(Date fecha_hora_modifico) {
-	this.fecha_hora_modifico = fecha_hora_modifico;
-}
-
-@JoinColumn(name = "id_municipio", referencedColumnName = "id_municipio") 
-@ManyToOne(optional = false) 
-public Municipio getMunicipio() {
-	return municipio;
-}
-
-public void setMunicipio(Municipio municipio) {
-	this.municipio = municipio;
-}
-
-@JoinColumn(name = "id_depto", referencedColumnName = "id_depto") 
-@ManyToOne(optional = false) 
-public Departamento getDepartamento() {
-	return departamento;
-}
-
-public void setDepartamento(Departamento departamento) {
-	this.departamento = departamento;
-}
-
-@JoinColumn(name = "dui", referencedColumnName = "dui") 
-@ManyToOne(optional = false) 
-public PadronElectoral getPadronelectoral() {
-	return padronelectoral;
-}
-
-public void setPadronelectoral(PadronElectoral padronelectoral) {
-	this.padronelectoral = padronelectoral;
-}
- 
  
 }
